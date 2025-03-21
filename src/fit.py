@@ -7,14 +7,20 @@ from scipy.optimize import curve_fit
 # We need the value of the earth gravity to determine the initial velocity and initial angle
 from generate import EARTH_GRAVITY
 
+file_path = 'data/A-test.txt'
 # Step 1: Determine the starting velocity and starting angle of the test dataset `data/A-test.txt`.
 
 ## 1. Load data file using https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html#numpy-loadtxt .
 ##    The first column corresponds to the abscissa x and the second column to the ordinate y.
+x, y = np.loadtxt(file_path, unpack=True)
 
 ## 2. Define the model: Look to the example on SciPy (the link below)
+#y(x;a,b) = ax + bx^2
+def func(x, a, b):
+    return a * x + b * x**2
 
 ## 3. Fit using https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html#curve-fit
+
 
 ## 4. Calculate the initial velocity and initial angle from the model parameters.
 ##    (Yes, this is a math exercise ;-) ) Compare your formulae with the Programmer.
