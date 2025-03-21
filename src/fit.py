@@ -12,7 +12,7 @@ file_path = 'data/A-test.txt'
 
 ## 1. Load data file using https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html#numpy-loadtxt .
 ##    The first column corresponds to the abscissa x and the second column to the ordinate y.
-x, y = np.loadtxt(file_path, unpack=True)
+xdata, ydata = np.loadtxt(file_path, unpack=True)
 
 ## 2. Define the model: Look to the example on SciPy (the link below)
 #y(x;a,b) = ax + bx^2
@@ -20,7 +20,7 @@ def func(x, a, b):
     return a * x + b * x**2
 
 ## 3. Fit using https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html#curve-fit
-
+popt, pcov = curve_fit(func, xdata, ydata)
 
 ## 4. Calculate the initial velocity and initial angle from the model parameters.
 ##    (Yes, this is a math exercise ;-) ) Compare your formulae with the Programmer.
