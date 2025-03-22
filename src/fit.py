@@ -24,6 +24,12 @@ popt, pcov = curve_fit(func, xdata, ydata)
 
 ## 4. Calculate the initial velocity and initial angle from the model parameters.
 ##    (Yes, this is a math exercise ;-) ) Compare your formulae with the Programmer.
+def velocity(x, a, b):
+    return a + 2 * b * x
+
+def angle(pos):
+    angle_val = velocity(pos, popt[0], popt[1])
+    return atan(angle_val)
 
 # Step 2: Plot the data and your fit into one diagram.
 
