@@ -22,7 +22,8 @@ class Hill:
     """The hill from which the jumpers fly off.
 
     .. code::
-            ^
+            ^        # Work here in Step 1!
+
             --------------> x
             |
             |     <- offset
@@ -57,7 +58,8 @@ class SkiJump:
     def y(self, x: float) -> float:
         """Return the trajectory."""
         # Work here in Step 1!
-        raise NotImplementedError()
+        return np.tan(self.alpha)*x-0.5*(EARTH_GRAVITY/(self.v0**2*(np.cos(self.alpha))**2))
+        #raise NotImplementedError()
 
     @staticmethod
     # ↑ this is the `staticmethod` decorator, whose documentation can be found
@@ -79,7 +81,16 @@ class SkiJump:
     def landing(self, hill: Hill) -> float:
         """Returns the intersection of the trajectory and the hill."""
         # Work here in Step 1!
-        raise NotImplementedError()
+        y_diff=100
+        x=0
+        step=0.01
+        while y_diff>10**(-5):
+            x+=step
+            y_skier=self.y(x)
+            y_hill=hill.y(x)
+            y_diff=abs(y_skier-y_hill)
+        return x
+        #raise NotImplementedError()
 
     def sample(self, hill: Hill, n: int) -> tuple[np.ndarray, np.ndarray]:
         """Discretize trajectory with `n` points until the landing.
