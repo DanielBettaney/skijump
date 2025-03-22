@@ -3,11 +3,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import curve_fit
+import math
 
 # We need the value of the earth gravity to determine the initial velocity and initial angle
 from generate import EARTH_GRAVITY
 
-file_path = 'data/A-test.txt'
+file_path = '../data/A-test.txt'
 # Step 1: Determine the starting velocity and starting angle of the test dataset `data/A-test.txt`.
 
 ## 1. Load data file using https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html#numpy-loadtxt .
@@ -27,9 +28,9 @@ popt, pcov = curve_fit(func, xdata, ydata)
 def velocity(x, a, b):
     return a + 2 * b * x
 
-def angle(pos):
-    angle_val = velocity(pos, popt[0], popt[1])
-    return atan(angle_val)
+def angle(x_pos):
+    angle_val = velocity(x_pos, popt[0], popt[1])
+    return math.atan(angle_val)
 
 # Step 2: Plot the data and your fit into one diagram.
 
@@ -41,3 +42,17 @@ def angle(pos):
 ##   The relevant command is described here: https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.savefig.html#matplotlib.figure.Figure.savefig
 ## - Note it is often convenient to not commit generated files to repositories, but their recipe instead!
 ##   (That is why there is a `.gitignore` file in the `plots/` folder.)
+
+def plot(x, y):
+    #plot original data
+    plt.plot(x, y, "ro", label = "data")
+    #plot fitted curve
+    plt.plot(x, y_fit, "b", label = "fit")
+    plt.legend()
+    plt.savefig('../plots/skijump.pdf', bbox_inches='tight') 
+
+alpha = angle(xdata[0])
+v0 = velocity(xdata[0], popt[0], popt[1])
+plot(xdata, ydata)
+print(alpha)
+print(v0)
