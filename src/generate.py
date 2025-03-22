@@ -74,7 +74,7 @@ class SkiJump:
         # Create a `SkiJump` object with the specification given in the file.
         # The `dataclass` decorator adds, e.g., a constructor with keyword arguments,
         # as is used above for creating the `Hill` object.
-        raise skijumpobj
+        return skijumpobj
 
     def landing(self, hill: Hill) -> float:
         """Returns the intersection of the trajectory and the hill."""
